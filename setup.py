@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     
 setup(
     name='CRM_tensorflow',
-    version='0.1.0',
+    version='0.1.1',
     description='A non-official implementation of the Complex Ratio Mask (CRM) technique as a Tensorflow layer.',
     long_description=long_description,
     long_description_content_type="text/markdown",

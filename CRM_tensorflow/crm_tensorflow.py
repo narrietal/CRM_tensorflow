@@ -23,11 +23,11 @@ class ComplexRatioMask(tf.keras.layers.Layer):
         
         if self.masking_mode == 'E':
             # Compute magnitude and phase of noisy signal
-            x_mag = tf.math.sqrt(tf.math.square(x_real), tf.math.square(x_imag))
+            x_mag = tf.math.sqrt(tf.math.square(x_real) + tf.math.square(x_imag))
             x_phase = tf.math.atan2(x_imag,x_real)
             
             # Compute magnitude and phase of mask
-            mask_mag = tf.math.sqrt(tf.square(mask_real)+tf.square(mask_imag))
+            mask_mag = tf.math.sqrt(tf.square(mask_real) + tf.square(mask_imag))
             # Note: Here, mask_real and mask_imag are divided by the magnitude mask_mag, ensuring the resulting values represent the unit vector in the same direction as the original complex number.
             # In short: The phase information should not be influenced by the mask's magnitude, hence we normalize them.
             phase_real = mask_real/(mask_mag+self.eps)
