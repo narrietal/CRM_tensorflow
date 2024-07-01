@@ -30,8 +30,8 @@ class ComplexRatioMask(tf.keras.layers.Layer):
             mask_mag = tf.math.sqrt(tf.square(mask_real) + tf.square(mask_imag))
             # Note: Here, mask_real and mask_imag are divided by the magnitude mask_mag, ensuring the resulting values represent the unit vector in the same direction as the original complex number.
             # In short: The phase information should not be influenced by the mask's magnitude, hence we normalize them.
-            phase_real = mask_real/(mask_mag+self.eps)
-            phase_imag = mask_imag/(mask_mag+self.eps)
+            phase_real = (mask_real/(mask_mag+self.eps)) + self.eps
+            phase_imag = (mask_imag/(mask_mag+self.eps)) + self.eps
             mask_phase = tf.math.atan2(phase_imag,phase_real)
             mask_mag = tf.math.tanh(mask_mag)
             mask_mag = tf.cast(mask_mag, tf.float32)
